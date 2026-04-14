@@ -27,12 +27,12 @@ I will use Java with some sort of Graphics library to make the board.
 
 
 ### What is your MVP?
-### If you only finish the core and nothing else, what does that look like? Be specific.
+#### If you only finish the core and nothing else, what does that look like? Be specific.
 
 A 2 player game with all core mechanics of the game implemented like displaying pieces, moving, win-loss conditions, etc. Both players play on the same computer.
 
 ### Stretch Goals (optional)
-### What would you add with extra time?
+#### What would you add with extra time?
 
 - If zones are closed off, it automatically calculates who one without needing players to manually step through turns until someone's zone runs out
 - Mulitplayer mode on different computers
@@ -47,6 +47,6 @@ Solo
 
 
 ### AI Use Plan
-### How do you plan to use AI tools — or not? No wrong answer. Just be honest.
+#### How do you plan to use AI tools — or not? No wrong answer. Just be honest.
 
 I plan to use some AI to help with particular functions as well as guide me through the Graphics library I will use but I am not vibe-coding the entire project.
