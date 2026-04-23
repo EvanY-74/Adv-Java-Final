@@ -10,3 +10,14 @@ Gameplay:
 Controls:
 - Enter moves using board coordinates like `f7`.
 - Use the same format each turn to select, move, and place a wall.
+
+## How to run
+
+Clone the repository
+
+Run these commands
+
+```
+javac Main.java
+java Main.java
+```
