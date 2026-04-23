@@ -5,6 +5,7 @@ public class BoardState {
     public int[][] board;
     public int turn;
     public boolean pieceSelected;
+    public boolean pieceMoved;
     public BoardSpace selectedPiece;
     List<BoardSpace> possibleMoves;
 
@@ -15,12 +16,13 @@ public class BoardState {
         int center = SIZE / 2;
         this.board[center - 1][center - 1] = 1; // player 1
         this.board[center][center - 1] = 2;     // player 2
-        this.board[center - 1][center] = 1;     // player 1
-        this.board[center][center] = 2;         // player 2
+        this.board[center - 1][center] = 2;     // player 2
+        this.board[center][center] = 1;         // player 1
         this.turn = 1;
         this.pieceSelected = false;
+        this.pieceMoved = false;
         this.selectedPiece = new BoardSpace(0, 0);
-        this.possibleMoves = new ArrayList<>();
+        this.possibleMoves = new ArrayList<BoardSpace>();
     }
 
     public void selectPiece(int col, int row) {
@@ -32,8 +34,30 @@ public class BoardState {
 
     public void deselectPiece() {
         this.pieceSelected = false;
+        this.pieceMoved = false;
 
         this.possibleMoves.clear();
+    }
+
+
+    public void movePiece(int col, int row) {
+        this.board[col][row] = this.board[this.selectedPiece.col][this.selectedPiece.row]; // move piece
+        this.board[this.selectedPiece.col][this.selectedPiece.row] = 0; // clear old spot
+        this.selectedPiece = new BoardSpace(col, row); // set selectedPiece to the new location
+        this.pieceMoved = true;
+
+        this.findPossibleMoves();
+    }
+    
+    public void createWall(int col, int row) {
+        this.board[col][row] = -this.turn; // place wall
+
+        this.switchTurns();
+    }
+    
+    public void switchTurns() {
+        this.turn = turn == 1 ? 2 : 1;
+        this.deselectPiece();
     }
 
     public void findPossibleMoves() {

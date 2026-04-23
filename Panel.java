@@ -27,13 +27,10 @@ public class Panel {
 
             try {
                 if (input.length() != 2) throw new IllegalArgumentException();
-                // System.out.println("result" + String.valueOf(input.charAt(0)));
                 int col = (int)(Character.toLowerCase(input.charAt(0)) - 'a');
                 if (col < 0 || col >= BOARD_SIZE) throw new IllegalArgumentException();
                 int row = Integer.parseInt(String.valueOf(input.charAt(1))) - 1;
                 if (row < 0 || row >= BOARD_SIZE) throw new IllegalArgumentException();
-                System.out.println("col " + col);
-                System.out.println("row " + row);
 
 
                 // Simulate the logic from your MouseListener
@@ -82,23 +79,23 @@ public class Panel {
         // Print Column Headers
         System.out.print("    ");
         for (int i = 0; i < BOARD_SIZE; i++) System.out.print((char)('a' + i) + "   ");
-        System.out.println("\n  " + "--- ".repeat(BOARD_SIZE));
+        System.out.println("\n  " + "----".repeat(BOARD_SIZE) + "-");
 
         for (int row = 0; row < BOARD_SIZE; row++) {
             // Print Row Header
             System.out.print(row + 1 + " | ");
 
             for (int col = 0; col < BOARD_SIZE; col++) {
-                int val = boardState.board[row][col];
-                String cell = getSprite(val, row, col);
+                int val = boardState.board[col][row];
+                String cell = getSprite(val, col, row);
                 
                 System.out.print(cell + " | ");
             }
-            System.out.println("\n  " + "----".repeat(BOARD_SIZE));
+            System.out.println("\n  " + "----".repeat(BOARD_SIZE) + "-");
         }
     }
 
-    private String getSprite(int val, int row, int col) {
+    private String getSprite(int val, int col, int row) {
         // Check if this cell is a "Possible Move" dot
         if (boardState.possibleMoves != null) {
             for (BoardSpace move : boardState.possibleMoves) {
@@ -113,12 +110,17 @@ public class Panel {
             }
         }
 
-        return switch (val) {
-            case 1 -> "1";
-            case 2 -> "2";
-            case -1 -> "@"; // Wall 1
-            case -2 -> "O"; // Wall 2
-            default -> " "; // Empty space (0)
-        };
+        switch (val) {
+            case 1:
+                return "1";
+            case 2:
+                return "2";
+            case -1:
+                return "@"; // Wall 1
+            case -2:
+                return "O"; // Wall 2
+            default:
+                return " "; // Empty space (0)
+        }
     }
 }
